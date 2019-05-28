@@ -4,10 +4,10 @@ const Mutations = {
     const item = await ctx.db.mutation.createItem(
       {
         data: {
-          ...args
-        }
+          ...args,
+        },
       },
-      info
+      info,
     );
 
     return item;
@@ -23,12 +23,22 @@ const Mutations = {
       {
         data: updates,
         where: {
-          id: args.id
-        }
+          id: args.id,
+        },
       },
-      info
+      info,
     );
-  }
+  },
+
+  async deleteItem(parent, args, ctx, info) {
+    const where = { id: args.id };
+    // Find the item
+    const item = await ctx.db.query.item({ where }, `{id title}`);
+    // TODO: Check if they own that item and have permission
+
+    // Delete it
+    return ctx.db.mutation.deleteItem({ where }, info);
+  },
 };
 
 module.exports = Mutations;
