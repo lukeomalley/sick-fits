@@ -35,7 +35,6 @@ export default class Items extends Component {
   render() {
     return (
       <Center>
-        <Pagination page={this.props.page} />
         <Query
           fetchPolicy="network-only"
           query={ALL_ITEMS_QUERY}
