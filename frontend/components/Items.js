@@ -8,7 +8,7 @@ import { perPage } from '../config';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
-    items(first: $first, skip: $skip, orderBy: createdAt_DESC) {
+    items(first: $first, skip: $skip, orderBy: createdAt_ASC) {
       id
       title
       price
@@ -37,6 +37,7 @@ export default class Items extends Component {
       <Center>
         <Pagination page={this.props.page} />
         <Query
+          fetchPolicy="network-only"
           query={ALL_ITEMS_QUERY}
           // fetchPolicy="network-only" This will remove the purpose of the cache
           variables={{
