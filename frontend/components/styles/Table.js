@@ -7,12 +7,17 @@ const Table = styled.table`
   thead {
     font-size: 10px;
   }
-  td,
+  td {
+    text-align: center; /* center checkbox horizontally */
+    vertical-align: middle; /* center checkbox vertically */
+    border-bottom: 1px solid ${props => props.theme.offWhite};
+    border-right: 1px solid ${props => props.theme.offWhite};
+  }
   th {
     border-bottom: 1px solid ${props => props.theme.offWhite};
     border-right: 1px solid ${props => props.theme.offWhite};
-    padding: 10px 5px;
     position: relative;
+    padding: 2px;
     &:last-child {
       border-right: none;
       width: 150px;
@@ -20,6 +25,10 @@ const Table = styled.table`
         width: 100%;
       }
     }
+  }
+  label {
+    padding: 10px 5px;
+    display: block;
   }
   tr {
     &:hover {
