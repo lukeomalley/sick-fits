@@ -36,7 +36,6 @@ export default class Items extends Component {
     return (
       <Center>
         <Query
-          fetchPolicy="network-only"
           query={ALL_ITEMS_QUERY}
           // fetchPolicy="network-only" This will remove the purpose of the cache
           variables={{

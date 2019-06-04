@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 const DropDown = styled.div`
   position: absolute;
-  width: 100%;
+  width: 99%;
   z-index: 2;
   border: 1px solid ${props => props.theme.lightgrey};
 `;
@@ -15,8 +15,10 @@ const DropDownItem = styled.div`
   ${props => (props.highlighted ? 'padding-left: 2rem;' : null)};
   display: flex;
   align-items: center;
-  border-left: 10px solid ${props => (props.highlighted ? props.theme.lightgrey : 'white')};
+  border-left: 10px solid
+    ${props => (props.highlighted ? props.theme.lightgrey : 'white')};
   img {
+    height: 50px;
     margin-right: 10px;
   }
 `;
