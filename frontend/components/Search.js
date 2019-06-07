@@ -1,5 +1,5 @@
 import React from 'react';
-import Downshift from 'downshift';
+import Downshift, { resetIdCounter } from 'downshift';
 import Router from 'next/router';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -23,6 +23,15 @@ const SEARCH_ITEMS_QUERY = gql`
   }
 `;
 
+function routeToItem(item) {
+  Router.push({
+    pathname: '/item',
+    query: {
+      id: item.id,
+    },
+  });
+}
+
 class AutoComplete extends React.Component {
   state = {
     items: [],
@@ -30,7 +39,6 @@ class AutoComplete extends React.Component {
   };
 
   onChange = debounce(async (event, client) => {
-    console.log('Searching...');
     // Turn loading on
     this.setState({ loading: true });
 
@@ -42,33 +50,60 @@ class AutoComplete extends React.Component {
 
     // Set the matched items onto the component state
     this.setState({ items: res.data.items, loading: false });
-    console.log(res);
-  }, 350);
+  }, 200);
 
   render() {
+    resetIdCounter();
     return (
       <SearchStyles>
-        <div>
-          <ApolloConsumer>
-            {client => (
-              <input
-                type="search"
-                onChange={event => {
-                  event.persist();
-                  this.onChange(event, client);
-                }}
-              />
-            )}
-          </ApolloConsumer>
-          <DropDown>
-            {this.state.items.map(item => (
-              <DropDownItem>
-                <img src={item.image} alt={item.title} />
-                {item.title}
-              </DropDownItem>
-            ))}
-          </DropDown>
-        </div>
+        <Downshift
+          itemToString={item => (item === null ? '' : item.title)}
+          onChange={routeToItem}
+        >
+          {({
+            getInputProps,
+            getItemProps,
+            isOpen,
+            inputValue,
+            highlightedIndex,
+          }) => (
+            <div>
+              <ApolloConsumer>
+                {client => (
+                  <input
+                    {...getInputProps({
+                      type: 'search',
+                      placeholder: 'Search For an Item',
+                      id: 'search',
+                      className: this.state.loading ? 'loading' : '',
+                      onChange: event => {
+                        event.persist();
+                        this.onChange(event, client);
+                      },
+                    })}
+                  />
+                )}
+              </ApolloConsumer>
+              {isOpen && (
+                <DropDown>
+                  {this.state.items.map((item, index) => (
+                    <DropDownItem
+                      {...getItemProps({ item })}
+                      key={item.id}
+                      highlighted={index === highlightedIndex}
+                    >
+                      <img src={item.image} alt={item.title} />
+                      {item.title}
+                    </DropDownItem>
+                  ))}
+                  {!this.state.items.length && !this.state.loading && (
+                    <DropDownItem>Nothing Found for {inputValue}</DropDownItem>
+                  )}
+                </DropDown>
+              )}
+            </div>
+          )}
+        </Downshift>
       </SearchStyles>
     );
   }
