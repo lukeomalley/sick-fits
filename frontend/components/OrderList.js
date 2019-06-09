@@ -59,7 +59,13 @@ class OrderList extends Component {
                             Items
                           </p>
                           <p>{order.items.length} Products</p>
-                          <p>{order.createdAt}</p>
+                          <p>
+                            {formatDistance(
+                              new Date(order.createdAt),
+                              new Date(),
+                            )}{' '}
+                            ago
+                          </p>
                           <p>{formatMoney(order.total)}</p>
                         </div>
                         <div className="images">

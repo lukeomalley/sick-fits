@@ -9,7 +9,6 @@ const stripe = require('../stripe');
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
-    // TODO: Check if they are logged in
     if (!ctx.request.userId) {
       throw new Error('You must be logged in to do that');
     }
@@ -51,7 +50,6 @@ const Mutations = {
     const where = { id: args.id };
     // Find the item
     const item = await ctx.db.query.item({ where }, `{id title user{ id }}`);
-    // TODO: Check if they own that item and have permission
     const ownsItem = item.user.id === ctx.request.userId;
     const hasPerissions = ctx.request.user.permissions.some(permission => {
       ['ADMIN', 'ITEMDELETE'].includes(permission);

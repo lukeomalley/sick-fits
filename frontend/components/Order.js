@@ -58,7 +58,11 @@ export default class Order extends Component {
               </p>
               <p>
                 <span>Date:</span>
-                <span>{order.createdAt}</span>
+                <span>
+                  {format(new Date(order.createdAt), 'MMMM d, YYYY h:mm a', {
+                    awareOfUnicodeTokens: true,
+                  })}
+                </span>
               </p>
               <p>
                 <span>Total:</span>
