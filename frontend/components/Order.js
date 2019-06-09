@@ -43,7 +43,7 @@ export default class Order extends Component {
           const order = data.order;
           // TODO: INVALID TIME
           return (
-            <OrderStyles>
+            <OrderStyles data-test="order">
               <Head>
                 <title>Sick Fits - Order {order.id}</title>
               </Head>
@@ -59,7 +59,7 @@ export default class Order extends Component {
               <p>
                 <span>Date:</span>
                 <span>
-                  {format(new Date(order.createdAt), 'MMMM d, YYYY h:mm a', {
+                  {format(new Date(order.createdAt), 'MMMM d, yyyy h:mm a', {
                     awareOfUnicodeTokens: true,
                   })}
                 </span>
@@ -92,3 +92,5 @@ export default class Order extends Component {
     );
   }
 }
+
+export { SINGLE_ORDER_QUERY };

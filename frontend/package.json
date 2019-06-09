@@ -15,10 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "apollo-boost": "^0.1.28",
-    "apollo-client": "^2.6.0",
+    "apollo-client": "^2.6.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-styled-components": "^1.10.0",
-    "date-fns": "^2.0.0-alpha.27",
+    "date-fns": "^2.0.0-alpha.31",
     "downshift": "^2.2.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -36,7 +36,7 @@
     "react-stripe-checkout": "^2.6.3",
     "react-transition-group": "^2.9.0",
     "styled-components": "^3.4.10",
-    "waait": "^1.0.4"
+    "waait": "^1.0.5"
   },
   "devDependencies": {
     "babel-jest": "^23.6.0",

@@ -31,11 +31,11 @@ exports[`<Pagination /> renders pagination for 18 items 1`] = `
   <p>
     Page 
     1
-     of
+     of 
     <span
       className="totalPages"
     >
-      5
+      3
     </span>
   </p>
   <p>

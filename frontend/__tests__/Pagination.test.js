@@ -47,7 +47,7 @@ describe('<Pagination />', () => {
     );
     await wait();
     wrapper.update();
-    expect(wrapper.find('.totalPages').text()).toEqual('5');
+    expect(wrapper.find('.totalPages').text()).toEqual('3');
     const pagination = wrapper.find('div[data-test="pagination"]');
     expect(toJSON(pagination)).toMatchSnapshot();
   });

@@ -1,6 +1,5 @@
 import ItemComponent from '../components/Item';
 import { shallow } from 'enzyme';
-import { wrap } from 'module';
 import toJSON from 'enzyme-to-json';
 const fakeItem = {
   id: 'ABC123',
